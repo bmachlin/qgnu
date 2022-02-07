@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+}
+
+a, a:visited {
+    text-decoration: underline;
+    color: #222;
+    cursor: pointer;
+}
+
+main {
+    max-width: 1200px;
+    width: 90%;
+    margin: 20px auto;
+}
+
+main a:hover {
+    font-style: italic;
+}
+
+main a:active {
+    padding-top: 2px;
+}
+
+h1 {
+    width: fit-content;
+    margin: 20px auto;
+}
+
+img {
+    margin-top: 10px;;
+    margin-bottom: 10px;;
+}
+
+section {
+    background: #c7c7c7;
+    padding: 20px;
+    text-align: left;
+    font-size: 110%;
+    margin-bottom: 2vh;
+}
+
+p {
+    text-align: justify;
+    margin: 0.5em 0em;
+    padding: 0em 1em;
+}
+
+img {
+    max-width: 100%;
+    box-shadow: 5px 5px 5px grey;
+}

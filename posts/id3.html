@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="../../res/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../main.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="id3.css" media="screen" charset="utf-8">
+    <title>ID3</title>
+</head>
+
+<body>
+    <nav><a href="/index.html" class="home">&lt--Home</a></nav>
+
+    <main>
+        <h1>ID3</h1>
+        <h2>Exploring the world of mp3 metadata</h2>
+        <h4>February 2022</h4>
+        <hr>
+        <section>
+            <p>
+                MP3s don't have metadata built into the specification. Instead there's an ID3 tag at the beginning of each MP3 that provides metadata. One interesting thing about ID3 is that there is a <a href="https://id3.org/id3v2.3.0" target="_blank" rel="noopener">spec</a>, but it's informal. It's more detailed than a set of guidelines but not as stringent as a  formal specification. Lots of music players don't parse every field described in the spec. In fact, the spec leaves room for plenty of custom fields - implying that a player <em>can't</em> be expected to properly parse every ID3 field it sees. A very good player will allow the user to tell it what custom fields to look for and how/where to display them.
+            </p>
+            <p>
+                ID3v2 is the de facto MP3 tagging standard, and versions 2.3 and 2.4 are the most common. Most other versions of ID3 and other tagging standards are less common and I will omit them for my purposes. 2.3 and 2.4 aren't all too different but 2.4 is less widely supported - even though both came out within a couple years from 1999-2001. I'll focus on 2.3 here since it's a little more common and the spec is a better defined, though 2.4 might sneak in here and there. 
+            </p>
+        </section>
+        <section>
+            <p>
+                The basic structure of an ID3v2.3 tag is this:
+            </p>
+            <ol style="font-family: monospace;">
+                <li>Header</li>
+                <ul>
+                    <li>The tag is at the beginning of the MP3 file and starts with the bytes "ID3"</li>
+                    <li>Two bytes for the version</li>
+                    <li>One byte for flags</li>
+                    <li>Four bites for the total size of the tag, not including this header</li>
+                </ul>
+                <li>Body</li>
+                <ul>
+                    <li>Series of frames, each with a frame header and frame data</li>
+                    <li>Padding</li>
+                    <ul><li>Padding is included so that if more tag data is added, it's less 
+                        likely that the file needs to be resized - which is time consuming and 
+                        tag editing is often done in bulk
+                    </li></ul>
+                </ul>
+            </ol>
+            <p>
+                Frames are made up of a short header and a data body:
+            </p>
+            <ol style="font-family: monospace;">
+                <li>
+                    Header
+                    <ul>
+                        <li>Four bytes/characters for frame ID, e.g. TALB, APIC</li>
+                        <li>Four bites for size</li>
+                        <li>Two bytes for flags</li>
+                    </ul>
+                </li>
+                <li>
+                    Data bytes
+                </li>
+            </ol>
+            <p>
+                To demonstrate these basics, I made a tag with only a song title and artist:
+                <br><img src="../res/tag_example_1.png"><br>
+                The artist is "Test Artist" (TPE1) and the title is "Test Song" (TIT2). I've yet to figure out why the text fields start with 01. If you know your character encodings, you might've figured out that this tag is in UTF-16. The spec doesn't mention anything about encodings but for whatever reason 2.3 uses either UTF-16 or ISO-8859-1 and 2.4 uses UTF-8. The tag size is 2104 bytes - the tag body is only 68 bytes but extra padding is included by the tagger I used (Mp3tag). (I'm using the <a href="https://marketplace.visualstudio.com/items?itemName=slevesque.vscode-hexdump" target="_blank" rel="noopener">hexdump for VSCode</a> extension to view the bytes)
+            </p>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,12 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #eceae7;
+    color: #333;
+}
+
+nav {
+    padding: 10px;
+}
