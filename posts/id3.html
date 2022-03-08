@@ -20,10 +20,19 @@
         <hr>
         <section>
             <p>
-                MP3s don't have metadata built into the specification. Instead there's an ID3 tag at the beginning of each MP3 that provides metadata. One interesting thing about ID3 is that there is a <a href="https://id3.org/id3v2.3.0" target="_blank" rel="noopener">spec</a>, but it's informal. It's more detailed than a set of guidelines but not as stringent as a  formal specification. Lots of music players don't parse every field described in the spec. In fact, the spec leaves room for plenty of custom fields - implying that a player <em>can't</em> be expected to properly parse every ID3 field it sees. A very good player will allow the user to tell it what custom fields to look for and how/where to display them.
+                MP3s don't have metadata built into the specification. 
+                Instead there's an ID3 tag at the beginning of each MP3 that provides metadata. 
+                One interesting thing about ID3 is that there is a <a href="https://id3.org/id3v2.3.0" target="_blank" rel="noopener">spec</a>, but it's informal. 
+                It's more detailed than a set of guidelines but not as stringent as a  formal specification. 
+                Lots of music players don't parse every field described in the spec. 
+                In fact, the spec leaves room for plenty of custom fields - implying that a player <em>can't</em> be expected to properly parse every ID3 field it sees. 
+                A very good player will allow the user to tell it what custom fields to look for and how/where to display them.
             </p>
             <p>
-                ID3v2 is the de facto MP3 tagging standard, and versions 2.3 and 2.4 are the most common. Most other versions of ID3 and other tagging standards are less common and I will omit them for my purposes. 2.3 and 2.4 aren't all too different but 2.4 is less widely supported - even though both came out within a couple years from 1999-2001. I'll focus on 2.3 here since it's a little more common and the spec is a better defined, though 2.4 might sneak in here and there. 
+                ID3v2 is the de facto MP3 tagging standard, and versions 2.3 and 2.4 are the most common. 
+                Most other versions of ID3 and other tagging standards are less common and I will omit them for my purposes. 
+                2.3 and 2.4 aren't all too different but 2.4 is less widely supported - even though both came out within a couple years from 1999-2001. 
+                I'll focus on 2.3 here since it's a little more common and the spec is a better defined, though 2.4 might sneak in here and there. 
             </p>
         </section>
         <section>
@@ -67,7 +76,12 @@
             <p>
                 To demonstrate these basics, I made a tag with only a song title and artist:
                 <br><img src="../res/tag_example_1.png"><br>
-                The artist is "Test Artist" (TPE1) and the title is "Test Song" (TIT2). I've yet to figure out why the text fields start with 01. If you know your character encodings, you might've figured out that this tag is in UTF-16. The spec doesn't mention anything about encodings but for whatever reason 2.3 uses either UTF-16 or ISO-8859-1 and 2.4 uses UTF-8. The tag size is 2104 bytes - the tag body is only 68 bytes but extra padding is included by the tagger I used (Mp3tag). (I'm using the <a href="https://marketplace.visualstudio.com/items?itemName=slevesque.vscode-hexdump" target="_blank" rel="noopener">hexdump for VSCode</a> extension to view the bytes)
+                The artist is "Test Artist" (TPE1) and the title is "Test Song" (TIT2). 
+                I've yet to figure out why the text fields start with 01. 
+                If you know your character encodings, you might've figured out that this tag is in UTF-16. 
+                The spec doesn't mention anything about encodings but for whatever reason 2.3 uses either UTF-16 or ISO-8859-1 and 2.4 uses UTF-8. 
+                The tag size is 2104 bytes - the tag body is only 68 bytes but extra padding is included by the tagger I used (Mp3tag). 
+                (I'm using the <a href="https://marketplace.visualstudio.com/items?itemName=slevesque.vscode-hexdump" target="_blank" rel="noopener">hexdump for VSCode</a> extension to view the bytes)
             </p>
         </section>
     </main>
