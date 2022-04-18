@@ -45,6 +45,7 @@ class Storage {
     }
 
     setItem(name, value) {
+        if (name === "show-heading") { console.trace() }
         if (this.useLocalStorage) {
             localStorage.setItem(name, value);
         } else {
