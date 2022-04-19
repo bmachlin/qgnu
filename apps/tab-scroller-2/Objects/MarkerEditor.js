@@ -9,7 +9,7 @@ class MarkerEditor {
     }
 
     Open(line) {
-        console.log("open at line", line);
+        // console.log("open at line", line);
         if (line < 0 || line > this.context.Tab.lines.length - 1) { return; }
         this.line = line;
 
@@ -34,7 +34,7 @@ class MarkerEditor {
     }
 
     Click(line) {
-        console.log("click", line)
+        // console.log("click", line)
         if (this.line != line) {
             this.Close();
             this.Open(line);
@@ -46,7 +46,7 @@ class MarkerEditor {
     }
 
     AddMarkerInfo(marker) {
-        console.log("add info for", marker);
+        // console.log("add info for", marker);
         document.getElementById("editorMinutesInput").value = marker.minutes;
         document.getElementById("editorSecondsInput").value = marker.seconds;
         document.getElementById("positionInput").value = marker.position;
@@ -55,7 +55,7 @@ class MarkerEditor {
     }
 
     ClearInfo() {
-        console.log("clear editor info");
+        // console.log("clear editor info");
         document.getElementById("editorMinutesInput").value = null;
         document.getElementById("editorSecondsInput").value = null;
         document.getElementById("positionInput").value = 0.50;
@@ -63,18 +63,16 @@ class MarkerEditor {
     }
 
     Remove() {
-        console.log("remove", this.line)
+        // console.log("remove", this.line)
         let marker = this.context.GetMarkerByLine(this.line);
         if (marker != null) {
             this.context.markers = this.context.markers.filter(m => m.line != this.line);
         }
 
         let lineText = this.context.Tab.lines[this.line];
-        console.log(lineText);
         lineText = lineText.replace(this.context.markerRegex, "");
-        // remove trailing space
-        if (lineText[lineText.length-1] == " ") lineText = lineText.slice(0,-1);
-        console.log(lineText);
+        if (lineText[lineText.length-1] == " ") lineText = lineText.slice(0,-1); // remove trailing space
+        
         this.context.Tab.lines[this.line] = lineText;
         this.context.Tab.SetLines();
         this.context.Display();
@@ -131,7 +129,6 @@ class MarkerEditor {
             lineText = this.context.Tab.lines[this.line] + " " + marker.MarkerString();
         }
 
-        console.log(lineText);
         this.context.Tab.lines[this.line] = lineText;
         this.context.Tab.SetLines();
         this.context.Display();

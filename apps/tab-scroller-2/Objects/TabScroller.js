@@ -49,13 +49,13 @@ class TabScroller {
             time = Math.min(time, this.context.Player.getDuration());
         }
     
-        console.log("setting time", this.context.runtime, "->", time);
+        // console.log("setting time", this.context.runtime, "->", time);
         this.context.runtime = time;
     
         this.SetMarkerIndex();
     
         if (snap) {
-            this.ScrollTowards(Math.max(this.context.nextMarkerIndex-1,0), true);
+            this.SnapToMarker(Math.max(this.context.nextMarkerIndex-1,0));
         }
         
         if (this.context.usingPlayer && ![ytUNSTARTED, ytCUED].includes(this.context.Player.getPlayerState())) {
@@ -97,9 +97,9 @@ class TabScroller {
         }
     
         // set focus to body for proper keypress fucntionality
-        // this probably isn't best pracitce
+        // this probably isn't best practice
         if (document.activeElement != document.body)
-            document.body.focus();
+            document.body.focus({preventScroll: true });
         
         document.getElementById("btn-playpause").innerHTML = "Pause";
     }
@@ -130,9 +130,11 @@ class TabScroller {
         let rtDiff = Math.abs(this.context.runtime - newruntime);
         this.context.runtime = parseFloat(newruntime.toFixed(3));
         // if a large skip in runtime, reset marker state
-        if (rtDiff > this.context.interval/1000*2) {
+        if (rtDiff > this.context.interval/1000*3) {
+            // console.log("big skip")
             this.SetMarkerIndex();
             this.ActivateMarkers();
+            this.SnapToMarker(Math.max(this.context.nextMarkerIndex-1,0));
         }
     
         this.UpdateTimerDisplay();
@@ -153,13 +155,14 @@ class TabScroller {
         }
     }
     
-    SnapToMarker(marker) {
+    SnapToMarker(markerIndex) {
+        let marker = this.context.markers[markerIndex];
         let line = document.getElementById('tab-text').children[marker.line];
         let target = window.innerHeight * marker.position;
     
         if (!line) return;
     
-        console.log("snaping to line", marker.line, "distance =", line.getBoundingClientRect().y - target);
+        // console.log(markerIndex, "snaping to line", marker.line, "distance =", line.getBoundingClientRect().y - target);
         window.scrollBy(0, line.getBoundingClientRect().y - target);
     }
     
@@ -174,7 +177,7 @@ class TabScroller {
         let marker = this.context.markers[markerIndex];
         let line = document.getElementById('tab-text').children[marker.line];
         let target = window.innerHeight * marker.position;
-        console.log(`SCROLL to  ${markerIndex}, (snap=${snap}, ${marker.time - this.context.runtime <= (this.context.interval+1)/1000 && marker.scroll == 'snap'})`);
+        // console.log(`SCROLL to  ${markerIndex}, (snap=${snap}, ${marker.time - this.context.runtime <= (this.context.interval+1)/1000 && marker.scroll == 'snap'})`);
     
         let scrollAmount = 0;
         let timeDiff = Math.max(marker.time - this.context.runtime, 0);
