@@ -26,13 +26,10 @@
                 It's more detailed than a set of guidelines but not as stringent as a  formal specification. 
                 Lots of music players don't parse every field described in the spec. 
                 In fact, the spec leaves room for plenty of custom fields - implying that a player <em>can't</em> be expected to properly parse every ID3 field it sees. 
-                A very good player will allow the user to tell it what custom fields to look for and how/where to display them.
             </p>
             <p>
                 ID3v2 is the de facto MP3 tagging standard, and versions 2.3 and 2.4 are the most common. 
-                Most other versions of ID3 and other tagging standards are less common and I will omit them for my purposes. 
                 2.3 and 2.4 aren't all too different but 2.4 is less widely supported - even though both came out within a couple years from 1999-2001. 
-                I'll focus on 2.3 here since it's a little more common and the spec is a better defined, though 2.4 might sneak in here and there. 
             </p>
         </section>
         <section>
@@ -42,10 +39,7 @@
             <ol style="font-family: monospace;">
                 <li>Header</li>
                 <ul>
-                    <li>The tag is at the beginning of the MP3 file and starts with the bytes "ID3"</li>
-                    <li>Two bytes for the version</li>
-                    <li>One byte for flags</li>
-                    <li>Four bites for the total size of the tag, not including this header</li>
+                    <li>3 characters: "ID3", flag bytes, version bytes, total tag size</li>
                 </ul>
                 <li>Body</li>
                 <ul>
@@ -65,7 +59,7 @@
                     Header
                     <ul>
                         <li>Four bytes/characters for frame ID, e.g. TALB, APIC</li>
-                        <li>Four bites for size</li>
+                        <li>Four bites for frame size</li>
                         <li>Two bytes for flags</li>
                     </ul>
                 </li>
